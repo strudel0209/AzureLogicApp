@@ -14,7 +14,7 @@
 #create the resource group
 resource "azurerm_resource_group" "dev" {
   name     = "la-tfdeploy-rg"
-  location = "East US"
+  location = "westeurope"
 }
 
 #create the storage account for Logic App
@@ -51,7 +51,7 @@ resource "azurerm_log_analytics_workspace" "dev" {
 
 #create the application insights
 resource "azurerm_application_insights" "dev" {
-  name                     = "logicapp-test-huidong"
+  name                     = "logicapp-test"
   location                 = azurerm_resource_group.dev.location
   resource_group_name      = azurerm_resource_group.dev.name
   application_type         = "web"
@@ -60,7 +60,7 @@ resource "azurerm_application_insights" "dev" {
 
 #create the standard Logic App with application insights and system managed identity enabled
 resource "azurerm_logic_app_standard" "dev" {
-  name                       = "logicapp-test-huidong"
+  name                       = "logicapp-test"
   location                   = azurerm_resource_group.dev.location
   resource_group_name        = azurerm_resource_group.dev.name
   app_service_plan_id        = azurerm_app_service_plan.dev.id
