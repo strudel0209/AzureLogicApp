@@ -67,7 +67,7 @@ stages:
          Write-Host  "##vso[task.setvariable variable=storagekey]$key"
         azurePowerShellVersion: LatestVersion
         
-    - task: qetza.replacetokens.replacetokens-task.replacetokens@5
+    - task: replacetokens@3 #qetza.replacetokens.replacetokens-task.replacetokens@5
       displayName: 'Replace tokens in terraform file'
       inputs:
         targetFiles: '$(Build.ArtifactStagingDirectory)/Terraform/*.tf'
