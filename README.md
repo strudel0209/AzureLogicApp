@@ -98,8 +98,7 @@ variables:
 - task: DownloadPipelineArtifact@2
       inputs:
         artifact: 'drop'
-        path: '$(Build.ArtifactStagingDirectory)'
-        
+        path: '$(Build.ArtifactStagingDirectory'
 ```
 
 4.  A PowerShell script to get the storage key
@@ -117,7 +116,7 @@ variables:
         
          Write-Host  "##vso[task.setvariable variable=storagekey]$key"
         azurePowerShellVersion: LatestVersion
-```
+  ```
 
 5.  Replace the token in the *LAstandard.tf* file, started with "__"  in the terraform code. For example "__storagekey__". This task will replace the token value with the values got from the PowerShell task.
 
