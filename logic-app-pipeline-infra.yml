@@ -8,7 +8,7 @@ variables:
 #the storage account information for the terraform state data, replace with your own resource
   terraformstoragerg: 'tfdeploy'
   terraformstorageaccount: 'tfdeploy'
-  storagekey: 'PipelineWillGetThisValueRuntime'
+  #storagekey: 'PipelineWillGetThisValueRuntime'
   terraformstorageaccountcontainer: 'terraform'
 
 stages:
@@ -67,13 +67,13 @@ stages:
          Write-Host  "##vso[task.setvariable variable=storagekey]$key"
         azurePowerShellVersion: LatestVersion
         
-    - task: replacetokens@3 #qetza.replacetokens.replacetokens-task.replacetokens@5
-      displayName: 'Replace tokens in terraform file'
-      inputs:
-        targetFiles: '$(Build.ArtifactStagingDirectory)/Terraform/*.tf'
-        tokenPattern: custom
-        tokenPrefix: '__'
-        tokenSuffix: '__'
+    # - task: qetza.replacetokens.replacetokens-task.replacetokens@5
+    #   displayName: 'Replace tokens in terraform file'
+    #   inputs:
+    #     targetFiles: '$(Build.ArtifactStagingDirectory)/Terraform/*.tf'
+    #     tokenPattern: custom
+    #     tokenPrefix: '__'
+    #     tokenSuffix: '__'
         
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
       displayName: 'Install Terraform latest'
@@ -106,5 +106,5 @@ stages:
         backendAzureRmResourceGroupName: '$(terraformstoragerg)'
         backendAzureRmStorageAccountName: '$(terraformstorageaccount)'
         backendAzureRmContainerName: '$(terraformstorageaccountcontainer)'
-        backendAzureRmKey: '$(storagekey)'
+        backendAzureRmKey: terraform.tfstate #'$(storagekey)'
 

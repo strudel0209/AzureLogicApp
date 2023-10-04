@@ -1,14 +1,22 @@
- terraform {
-  required_version = ">= 0.11" 
- backend "azurerm" {
-  storage_account_name = "__terraformstorageaccount__"
-    container_name       = "terraform"
-    key                  = "terraform.tfstate"
-	access_key  ="__storagekey__"
-	}
-	}
-  provider "azurerm" {
-  features {}
+#  terraform {
+#   required_version = ">= 0.11" 
+#  backend "azurerm" {
+#   storage_account_name = "__terraformstorageaccount__"
+#     container_name       = "terraform"
+#     key                  = "terraform.tfstate"
+# 	access_key  ="__storagekey__"
+# 	}
+# 	}
+#   provider "azurerm" {
+#   features {}
+# }
+terraform {
+  backend "azurerm" {
+    resource_group_name      = "tfdeploy"
+    storage_account_name     = "tfdeploy"
+    container_name           = "terraform"
+    key                      = "terraform.tfstate"
+  }
 }
 
 #create the resource group
